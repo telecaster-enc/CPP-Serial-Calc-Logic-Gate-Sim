@@ -4,31 +4,31 @@ char buffer[8] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 int oprand1, oprand2;
 
 char calculatespecial(int d1, int d2, int op) {
-    if (op == 0) {
+    if (op == 0) { //nand
         if (d1 == '1' && d2 == '1') {
             return '0';
         } else {
             return '1';
         }
-    } else if (op == 1) {
+    } else if (op == 1) { //xnor
         if ((d1 == '1' && d2 == '0') || (d1 == '0' && d2 == '1')) {
             return '1';
         } else {
             return '0';
         }
-    } else if (op == 2) {
+    } else if (op == 2) { //and
         if (d1 == '1' && d2 == '1') {
             return '1' ;
         } else {
             return '0';
         }
-    } else if (op == 3) {
+    } else if (op == 3) { //xor
         if ((d1 == '1' && d2 == '0') || (d1 == '0' && d2 == '1')) {
             return '1';
         } else {
             return '0';
         }
-    } else if (op == 4) {
+    } else if (op == 4) { //nor
         if (d1 == '0' && d2 == '0') {
             return '1';
         } else {
@@ -52,7 +52,7 @@ void token4digit(){
     }
 }
 
-// and xor nor not
+// and xor nor
 void token3digit(){
     oprand1 = buffer[4];
     oprand2 = buffer[6];
@@ -129,7 +129,7 @@ for (int i = 0; i < 5; i++) {
                 cout << "x" << endl;
             }
         } else if (i == 3) {
-            if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'T') {
+            if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'T') { //not
                 if (buffer[4] == '0') {
                     cout << "1" << endl;
                 } else if (buffer[4] == '1') {
