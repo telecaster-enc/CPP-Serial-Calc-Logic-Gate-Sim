@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
-char buffer[8] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-int oprand1, oprand2;
+char buffer[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+int oprand1, oprand2, stop;
 
 char calculatespecial(int d1, int d2, int op) {
     if (op == 0) { //nand
@@ -35,7 +35,7 @@ char calculatespecial(int d1, int d2, int op) {
             return '0';
         }
     } else {
-        return 'invalid';
+        return 'x';
     }
 }
 
@@ -48,7 +48,7 @@ void token4digit(){
     } else if (buffer[0] == 'X' && buffer[1] == 'N' && buffer[2] == 'O' && buffer[3] == 'R') {
         cout<<calculatespecial(oprand1, oprand2, 1)<<endl;
     } else {
-        cout << "invalid" << endl;
+        cout << "x" << endl;
     }
 }
 
@@ -63,7 +63,7 @@ void token3digit(){
     } else if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'R') {
         cout<<calculatespecial(oprand1, oprand2, 4)<<endl;
     } else {
-        cout << "invalid" << endl;
+        cout << "x" << endl;
     } 
 }
 
@@ -76,9 +76,14 @@ void token1digit(){
     } else if (buffer[2] == '*') {
         cout << oprand1 * oprand2 << endl;
     } else if (buffer[2] == '/') {
-        cout << oprand1 / oprand2 << endl;
+        if (oprand2 == 0) {
+            cout << "x" << endl;
+            return;
+        }
+        float result = static_cast<float>(oprand1) / static_cast<float>(oprand2);
+        cout << result << endl;
     } else {
-        cout << "invalid" << endl;
+        cout << "x" << endl;
     }
 }
 
@@ -104,20 +109,37 @@ int main() {
 
 cin.getline(buffer, 9);
 
+for (int i = 0; i < 9; i++) {
+    if (buffer[i] == '\0' || buffer[i] == '\n') {
+        stop = i;
+        break;
+    }
+    if (buffer[i] == ' ') {
+        continue;
+    } else if ((buffer[i] >= '0' && buffer[i] <= '9') || (buffer[i] >= 'A' && buffer[i] <= 'Z')) {
+        continue;
+    } else if (buffer[i] == '+' || buffer[i] == '-' || buffer[i] == '*' || buffer[i] == '/') {
+        continue;
+    } else {
+        cout << "x" << endl;
+        return 0;
+    }
+}
+
 for (int i = 0; i < 5; i++) {
     if (buffer[i] != ' ') {
         continue;
     } else {
         if (i == 1) {
-            if (checknumber(0, 4) == true) {
+            if ((checknumber(0, 4) == true) && stop == 5) {
                 oprand1 = buffer[0] - '0';
                 oprand2 = buffer[4] - '0';
                 token1digit();
             } else {
-                cout << "invalid" << endl;
+                cout << "x" << endl;
             }       
         } else if (i == 2) { //or
-            if ((buffer[0] == 'O' && buffer[1] == 'R') && (checkdigit(3, 5) == true)) {
+            if ((buffer[0] == 'O' && buffer[1] == 'R') && (checkdigit(3, 5) == true) && stop == 6) {
                 oprand1 = buffer[3];
                 oprand2 = buffer[5];
                 if (oprand1 == '0' && oprand2 == '0') {
@@ -126,30 +148,30 @@ for (int i = 0; i < 5; i++) {
                     cout << "1" << endl;
                 }
             } else {
-                cout << "invalid" << endl;
+                cout << "x" << endl;
             }
         } else if (i == 3) {
-            if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'T') { //not
+            if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'T' && stop == 5) { //not
                 if (buffer[4] == '0') {
                     cout << "1" << endl;
                 } else if (buffer[4] == '1') {
                     cout << "0" << endl;
                 } else {
-                    cout << "invalid" << endl;
+                    cout << "x" << endl;
                 }
-            } else if (checkdigit(4, 6) == true) {
+            } else if (checkdigit(4, 6) == true && stop == 7) {
                 token3digit();
             } else {
-                cout << "invalid" << endl;
+                cout << "x" << endl;
             }
         } else if (i == 4) {
-            if (checkdigit(5, 7) == true) {
+            if (checkdigit(5, 7) == true && stop == 8) {
                 token4digit();
             } else {
-                cout << "invalid" << endl;
+                cout << "x" << endl;
             }
         } else {
-            cout << "invalid" << endl;
+            cout << "x" << endl;
         }
         break;
     }
