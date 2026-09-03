@@ -35,7 +35,7 @@ char calculatespecial(int d1, int d2, int op) {
             return '0';
         }
     } else {
-        return 'x';
+        return 'invalid';
     }
 }
 
@@ -48,7 +48,7 @@ void token4digit(){
     } else if (buffer[0] == 'X' && buffer[1] == 'N' && buffer[2] == 'O' && buffer[3] == 'R') {
         cout<<calculatespecial(oprand1, oprand2, 1)<<endl;
     } else {
-        cout << "x" << endl;
+        cout << "invalid" << endl;
     }
 }
 
@@ -63,7 +63,7 @@ void token3digit(){
     } else if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'R') {
         cout<<calculatespecial(oprand1, oprand2, 4)<<endl;
     } else {
-        cout << "x" << endl;
+        cout << "invalid" << endl;
     } 
 }
 
@@ -78,7 +78,7 @@ void token1digit(){
     } else if (buffer[2] == '/') {
         cout << oprand1 / oprand2 << endl;
     } else {
-        cout << "x" << endl;
+        cout << "invalid" << endl;
     }
 }
 
@@ -114,7 +114,7 @@ for (int i = 0; i < 5; i++) {
                 oprand2 = buffer[4] - '0';
                 token1digit();
             } else {
-                cout << "x" << endl;
+                cout << "invalid" << endl;
             }       
         } else if (i == 2) { //or
             if ((buffer[0] == 'O' && buffer[1] == 'R') && (checkdigit(3, 5) == true)) {
@@ -126,7 +126,7 @@ for (int i = 0; i < 5; i++) {
                     cout << "1" << endl;
                 }
             } else {
-                cout << "x" << endl;
+                cout << "invalid" << endl;
             }
         } else if (i == 3) {
             if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'T') { //not
@@ -135,21 +135,21 @@ for (int i = 0; i < 5; i++) {
                 } else if (buffer[4] == '1') {
                     cout << "0" << endl;
                 } else {
-                    cout << "x" << endl;
+                    cout << "invalid" << endl;
                 }
             } else if (checkdigit(4, 6) == true) {
                 token3digit();
             } else {
-                cout << "x" << endl;
+                cout << "invalid" << endl;
             }
         } else if (i == 4) {
             if (checkdigit(5, 7) == true) {
                 token4digit();
             } else {
-                cout << "x" << endl;
+                cout << "invalid" << endl;
             }
         } else {
-            cout << "x" << endl;
+            cout << "invalid" << endl;
         }
         break;
     }
