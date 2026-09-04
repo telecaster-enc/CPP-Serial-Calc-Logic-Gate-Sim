@@ -128,7 +128,12 @@ for (int i = 0; i < 9; i++) {
 
 for (int i = 0; i < 5; i++) {
     if (buffer[i] != ' ') {
-        continue;
+        if (i < 4){
+            continue;
+        } else {
+            cout << "x" << endl;
+            return 0;
+        }
     } else {
         if (i == 1) {
             if ((checknumber(0, 4) == true) && stop == 5) {
@@ -137,6 +142,7 @@ for (int i = 0; i < 5; i++) {
                 token1digit();
             } else {
                 cout << "x" << endl;
+                return 0;
             }       
         } else if (i == 2) { //or
             if ((buffer[0] == 'O' && buffer[1] == 'R') && (checkdigit(3, 5) == true) && stop == 6) {
@@ -149,6 +155,7 @@ for (int i = 0; i < 5; i++) {
                 }
             } else {
                 cout << "x" << endl;
+                return 0;
             }
         } else if (i == 3) {
             if (buffer[0] == 'N' && buffer[1] == 'O' && buffer[2] == 'T' && stop == 5) { //not
@@ -163,15 +170,18 @@ for (int i = 0; i < 5; i++) {
                 token3digit();
             } else {
                 cout << "x" << endl;
+                return 0;
             }
         } else if (i == 4) {
             if (checkdigit(5, 7) == true && stop == 8) {
                 token4digit();
             } else {
                 cout << "x" << endl;
+                return 0;
             }
         } else {
             cout << "x" << endl;
+            return 0;
         }
         break;
     }

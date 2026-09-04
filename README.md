@@ -69,6 +69,6 @@ AND 1 0
 
 ## Roadmap
 
-- [ ] Port input handling to Arduino Serial (`Serial.available()` / `Serial.read()` loop, byte-by-byte buffer fill, no `String` class)
-- [ ] Confirm behavior against real 2KB RAM budget on ATmega328P
+- [x] Port input handling to Arduino Serial (`Serial.available()` / `Serial.read()` loop, byte-by-byte buffer fill, no `String` class)
+- [x] Confirm behavior against real 2KB RAM budget on ATmega328P
 - [ ] Consider extending calculator to multi-digit operands (requires dynamic-length parsing instead of fixed character positions)
